@@ -1,8 +1,8 @@
-## Open-source phishing code
+## Open-source phishing tool
 
 ### About SocialX
 
-SocialX is an open-source code that makes phishing easy.
+SocialX is an open-source tool that makes phishing easy.
 
 ### Benefits
 
