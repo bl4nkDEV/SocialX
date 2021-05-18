@@ -6,7 +6,7 @@ SocialX is an open-source code that makes phishing easy.
 
 ### Benefits
 
-While using SocialX you'll get these features.
+While using SocialX you'll get these features:
 * Captive portal
 * Simple usage
 * Dashboard
