@@ -10,6 +10,12 @@ While using SocialX you'll get these features:
 * Dashboard
 * Saving credentials to SPIFFS
 
+### Requirements
+
+You'll need two things.
+* ESP8266
+* Common programming knowledge
+
 ### Warning
 
 Educational purpose only. I'm not responsible for any of your actions!
