@@ -1,5 +1,3 @@
-## Open-source phishing tool
-
 ### About SocialX
 
 SocialX is an open-source tool that makes phishing easy.
