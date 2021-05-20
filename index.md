@@ -13,7 +13,7 @@ While using SocialX you'll get these features:
 ### Requirements
 
 You'll need two things.
-* ESP8266
+* ESP32
 * Common programming knowledge
 
 ### Warning
