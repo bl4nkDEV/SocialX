@@ -1,0 +1,124 @@
+*{
+	margin: 0 auto;
+	padding: 0;
+	outline: 0;
+	text-decoration: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+  justify-content: center;
+}
+body{
+	font-family: arial;
+	font-size: 14px;
+	color: #1c1e21;
+	font-weight: normal;
+	background: #f0f2f5
+}
+.loginsignup{
+	padding: 120px;
+}
+.container{
+	max-width: 992px;
+	margin: 0;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+.justify-content-between{
+	justify-content: space-between;
+}
+.content-left{
+	max-width: 500px;
+	margin: auto;
+  padding-top: 50px;
+}
+.button {
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  background-color: #1a73e8;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.content-left h1{
+	font-size: 40px;
+	color: #1877f2;
+	margin-bottom: 20px;
+	font-weight: 900;
+}
+.content-left p{
+	margin-bottom: 35px;
+}
+.content-left{
+	max-width: 450px;
+	margin: 0 auto;
+	text-align: center;
+  justify-content: center;
+}
+.content-left form{
+	width: 400px;
+	height: 350px;
+	background: #fff;
+	border-radius: 5px;
+	padding: 15px;
+	-webkit-box-shadow: -1px -1px 8px -1px rgba(0,0,0,0.52);
+	-moz-box-shadow: -1px -1px 8px -1px rgba(0,0,0,0.52);
+	box-shadow: -1px -1px 8px -1px rgba(0,0,0,0.52);
+	margin-bottom: 30px;
+}
+.content-left form input{
+	width: 100%;
+	height: 50px;
+	font-size: 17px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 0 15px;
+	margin-bottom: 15px;
+}
+.content-left form input:hover{
+	border: 2px solid #1c1e21;
+	background: #f0f2f5;
+}
+.btn{
+	font-size: 20px;
+	background: #1877f2;
+	height: 50px;
+	color: #fff;
+	line-height: 50px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	text-transform: capitalize;
+}
+.login button{
+	display: block;
+}
+.create-btn button{
+	display: inline-block;
+	margin-top: 20px;
+	padding: 0 17px;
+	background: #4cd137;
+	transition: .3s;
+}
+.create-btn button:hover{
+	background: #44bd32;
+}
+.forgot button{
+	font-size: 14px;
+	line-height: 19px;
+	color:#1877f2;
+}
+.forgot button:hover,
+.content-left p button:hover{
+	text-decoration: underline;
+}
+.content-left p button{
+	color: #1c1e21;
+	font-weight: 600;
+}

